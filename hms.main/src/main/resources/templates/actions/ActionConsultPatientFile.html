@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HMS-PMS</title>
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+</head>
+<body>
+<div class="header">
+    <h1>Consult Patient File</h1>
+</div>
+
+<form th:action="@{/actions/consult-patient-file}" th:object="${consultPatientFileForm}" method="post" onsubmit="showLoading()">
+    <table>
+        <tr>
+            <td><label for="staffId">Staff ID:</label></td>
+            <td><input type="text" id="staffId" th:field="*{staffId}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="patientId">Patient ID:</label></td>
+            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Consult Patient File">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
+    </table>
+
+    <table th:if="${successMessage != null}">
+        <tr>
+            <th colspan="2" style="text-align: center;">Patient Information</th>
+        </tr>
+        <tr>
+            <td><strong>Patient Number:</strong></td>
+            <td th:text="${patientInfo.patientNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>Medical Staff ID:</strong></td>
+            <td th:text="${patientInfo.medicalStaffId}"></td>
+        </tr>
+        <tr>
+            <td><strong>Insurance Number:</strong></td>
+            <td th:text="${patientInfo.insuranceNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>First Name:</strong></td>
+            <td th:text="${patientInfo.firstName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Last Name:</strong></td>
+            <td th:text="${patientInfo.lastName}"></td>
+        </tr>
+        <tr>
+            <td><strong>DOB: </strong></td>
+            <td th:text="${patientInfo.dateOfBirth}"></td>
+        </tr>
+        <tr>
+            <td><strong>Gender: </strong></td>
+            <td th:text="${patientInfo.gender}"></td>
+        </tr>
+        <tr>
+            <td><strong>Address:</strong></td>
+            <td th:text="${patientInfo.address}"></td>
+        </tr>
+
+        <tr>
+            <th colspan="2" style="text-align: center;">Medication Information</th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table border="1">
+                    <tr>
+                        <th>Doctor ID</th>
+                        <th>Drug Name</th>
+                        <th>Units Per Day</th>
+                        <th>Method of Administration</th>
+                        <th>Start Date</th>
+                        <th>Finish Date</th>
+                    </tr>
+                    <tr th:each="prescription : ${patientInfo.prescriptions}">
+                        <td th:text="${prescription.doctorId}"></td>
+                        <td th:text="${prescription.drugName}"></td>
+                        <td th:text="${prescription.unitsPerDay}"></td>
+                        <td th:text="${prescription.methodOfAdministration}"></td>
+                        <td th:text="${prescription.startDate}"></td>
+                        <td th:text="${prescription.finishDate}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2" style="text-align: center;">Next of Kin Information</th>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin First Name:</strong></td>
+            <td th:text="${patientInfo.constituentFile.firstName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Last Name:</strong></td>
+            <td th:text="${patientInfo.constituentFile.lastName}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Phone:</strong></td>
+            <td th:text="${patientInfo.constituentFile.telephoneNumber}"></td>
+        </tr>
+        <tr>
+            <td><strong>Next of Kin Relationship:</strong></td>
+            <td th:text="${patientInfo.constituentFile.relationship}"></td>
+        </tr>
+    </table>
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
+</form>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
+</body>
+</html>

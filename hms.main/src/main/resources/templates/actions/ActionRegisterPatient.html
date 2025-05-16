@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+</head>
+<body>
+    <div class="header">
+        <h1 class="page-title">Register Patient</h1>
+    </div>
+    <form th:action="@{/actions/register-patient}" th:object="${registerPatientForm}" method="post" onsubmit="showLoading()">
+        <table>
+            <tr>
+                <td><label for="medicalStaffId">Medical Staff ID:</label></td>
+                <td><input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="insuranceNumber">Insurance Number:</label></td>
+                <td><input type="text" id="insuranceNumber" th:field="*{insuranceNumber}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="firstName">First Name:</label></td>
+                <td><input type="text" id="firstName" th:field="*{firstName}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="lastName">Last Name:</label></td>
+                <td><input type="text" id="lastName" th:field="*{lastName}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="address">Address:</label></td>
+                <td><input type="text" id="address" th:field="*{address}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="telephoneNumber">Telephone Number:</label></td>
+                <td><input type="text" id="telephoneNumber" th:field="*{telephoneNumber}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="dateOfBirth">Date of Birth:</label></td>
+                <td><input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="gender">Gender:</label></td>
+                <td><input type="text" id="gender" th:field="*{gender}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="maritalStatus">Marital Status:</label></td>
+                <td><input type="text" id="maritalStatus" th:field="*{maritalStatus}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="externalDoctorId">External Doctor ID:</label></td>
+                <td><input type="text" id="externalDoctorId" th:field="*{externalDoctorId}" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2"><h2>Next of Kin Information</h2></td>
+            </tr>
+
+            <tr>
+                <td><label for="nextOfKinFirstName">First Name:</label></td>
+                <td><input type="text" id="nextOfKinFirstName" th:field="*{nextOfKinFirstName}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="nextOfKinLastName">Last Name:</label></td>
+                <td><input type="text" id="nextOfKinLastName" th:field="*{nextOfKinLastName}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="relationshipToPatient">Relationship to Patient:</label></td>
+                <td><input type="text" id="relationshipToPatient" th:field="*{nextOfKinRelationshipToPatient}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="nextOfKinAddress">Address:</label></td>
+                <td><input type="text" id="nextOfKinAddress" th:field="*{nextOfKinAddress}" required></td>
+            </tr>
+
+            <tr>
+                <td><label for="nextOfKinTelephoneNumber">Telephone Number:</label></td>
+                <td><input type="text" id="nextOfKinTelephoneNumber" th:field="*{nextOfKinTelephoneNumber}" required></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="submit" value="Register">
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input type="button" value="Return" onclick="window.location.href='/'">
+                </td>
+            </tr>
+            
+        </table>
+
+        <!-- Display loading message -->
+        <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+        <!-- Display success or error message -->
+        <div class="message success" th:if="${successMessage != null}" th:text="${successMessage}"></div>
+        <div class="message error" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
+
+    </form>
+
+    <script>
+        function showLoading() {
+            document.getElementById("loadingText").style.display = "block";
+        }
+    </script>
+</body>
+</html>
