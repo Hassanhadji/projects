@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+</head>
+<body>
+    <div class="header">
+        <h1>Register Staff</h1>
+    </div>
+    <div class="content">
+<form th:action="@{/actions/register-staff/register}" method="post" onsubmit="showLoading()">
+    <table>
+        <tr>
+            <td>
+                <table th:object="${registerStaffForm}">
+                    <tr>
+                        <td><label for="employeeNumber">Employee Number:</label></td>
+                        <td><input type="text" id="employeeNumber" th:field="*{employeeNumber}" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="password">Password:</label></td>
+                        <td><input type="password" id="password" th:field="*{password}" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="firstName">First Name:</label></td>
+                        <td><input type="text" id="firstName" th:field="*{firstName}" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="lastName">Last Name:</label></td>
+                        <td><input type="text" id="lastName" th:field="*{lastName}" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="emailAddress">Email Address:</label></td>
+                        <td><input type="email" id="emailAddress" th:field="*{emailAddress}" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="role">Staff Role:</label></td>
+                        <td><select id="role" name="role" th:field="*{role}">
+                            <option th:each="staffType : ${T(seg3102.group25.wellmeadows.hmspms.domain.staff.valueObjects.StaffType).values()}"
+                                    th:value="${staffType}" th:text="${staffType}"></option>
+                        </select></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table th:object="${staffShiftForm}">
+                    <tr>
+                        <td><label for="division">Division ID:</label></td>
+                        <td><input type="text" id="division" th:field="*{division}" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="shiftType">Shift Type:</label></td>
+                        <td><select id="shiftType" name="shiftType" th:field="*{shiftType}">
+                            <option th:each="shiftType : ${T(seg3102.group25.wellmeadows.hmspms.domain.facility.valueObjects.ShiftType).values()}"
+                                    th:value="${shiftType}" th:text="${shiftType}"></option>
+                        </select></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Register Staff">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button"  value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
+    </table>
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
+</form>
+</div>
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

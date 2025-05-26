@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <title>HMS-PMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+</head>
+<body>
+
+<div class="header">
+    <h1>Update Patient File</h1>
+</div>
+
+<form th:action="@{/actions/update-patient-file}" th:object="${updatePatientFileForm}" method="post" onsubmit="showLoading()">
+    <table>
+        <tr>
+            <td><label for="medicalStaffId">Medical Staff ID:</label></td>
+            <td><input type="text" id="medicalStaffId" th:field="*{medicalStaffId}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="patientId">Patient ID:</label></td>
+            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="insuranceNumber">Insurance Number:</label></td>
+            <td><input type="text" id="insuranceNumber" th:field="*{insuranceNumber}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="firstName">First Name:</label></td>
+            <td><input type="text" id="firstName" th:field="*{firstName}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="lastName">Last Name:</label></td>
+            <td><input type="text" id="lastName" th:field="*{lastName}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="address">Address:</label></td>
+            <td><input type="text" id="address" th:field="*{address}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="telephoneNumber">Telephone Number:</label></td>
+            <td><input type="text" id="telephoneNumber" th:field="*{telephoneNumber}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="dateOfBirth">Date of Birth:</label></td>
+            <td><input type="date" id="dateOfBirth" th:field="*{dateOfBirth}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="gender">Gender:</label></td>
+            <td><input type="text" id="gender" th:field="*{gender}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="maritalStatus">Marital Status:</label></td>
+            <td><input type="text" id="maritalStatus" th:field="*{maritalStatus}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="externalDoctorId">External Doctor ID:</label></td>
+            <td><input type="text" id="externalDoctorId" th:field="*{externalDoctorId}"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><h2>Next of Kin Information</h2></td>
+        </tr>
+
+        <tr>
+            <td><label for="nextOfKinFirstName">Next of Kin First Name:</label></td>
+            <td><input type="text" id="nextOfKinFirstName" th:field="*{nextOfKinFirstName}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="nextOfKinLastName">Next of Kin Last Name:</label></td>
+            <td><input type="text" id="nextOfKinLastName" th:field="*{nextOfKinLastName}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="nextOfKinRelationshipToPatient">Next of Kin Relationship to Patient:</label></td>
+            <td><input type="text" id="nextOfKinRelationshipToPatient" th:field="*{nextOfKinRelationshipToPatient}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="nextOfKinAddress">Next of Kin Address:</label></td>
+            <td><input type="text" id="nextOfKinAddress" th:field="*{nextOfKinAddress}"></td>
+        </tr>
+
+        <tr>
+            <td><label for="nextOfKinTelephoneNumber">Next of Kin Telephone Number:</label></td>
+            <td><input type="text" id="nextOfKinTelephoneNumber" th:field="*{nextOfKinTelephoneNumber}"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Update Patient File">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
+    </table>
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
+</form>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
+</body>
+</html>

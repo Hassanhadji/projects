@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/formstyles.css" th:href="@{/css/formstyles.css}">
+    <title>Prescribe Medication | WHMS</title>
+    <link rel="icon" type="image/x-icon" href="../images/icon.ico">
+</head>
+<body>
+<div class="header">
+    <h1>Prescribe Medication</h1>
+</div>
+<form th:action="@{/actions/prescribe-medication}" th:object="${prescribeMedicationForm}" method="post" onsubmit="showLoading()">
+    <table>
+        <tr>
+            <td><label for="doctorId">Doctor ID:</label></td>
+            <td><input type="text" id="doctorId" th:field="*{doctorId}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="patientId">Patient ID:</label></td>
+            <td><input type="text" id="patientId" th:field="*{patientId}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="drugNumber">Drug Number:</label></td>
+            <td><input type="text" id="drugNumber" th:field="*{drugNumber}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="drugName">Drug Name:</label></td>
+            <td><input type="text" id="drugName" th:field="*{drugName}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="unitsPerDay">Units Per Day:</label></td>
+            <td><input type="number" id="unitsPerDay" th:field="*{unitsPerDay}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="unitsAtAdministrationTimes">Units at Administration Times:</label></td>
+            <td><input type="number" id="unitsAtAdministrationTimes" th:field="*{unitsAtAdministrationTimes}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="methodOfAdministration">Method of Administration:</label></td>
+            <td><input type="text" id="methodOfAdministration" th:field="*{methodOfAdministration}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="startDate">Start Date:</label></td>
+            <td><input type="date" id="startDate" th:field="*{startDate}" required></td>
+        </tr>
+
+        <tr>
+            <td><label for="finishDate">Finish Date:</label></td>
+            <td><input type="date" id="finishDate" th:field="*{finishDate}" required></td>
+        </tr>
+
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="submit" value="Prescribe Medication">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;">
+                <input type="button" value="Return" onclick="window.location.href='/'">
+            </td>
+        </tr>
+    </table>
+    <!-- Display loading message -->
+    <div id="loadingText" style="display: none; color: yellow;">Loading...</div>
+    <!-- Display success or error message -->
+    <div th:if="${successMessage != null}" th:text="${successMessage}" style="color: green;"></div>
+    <div th:if="${errorMessage != null}" th:text="${errorMessage}" style="color: red;"></div>
+
+</form>
+
+<script>
+    function showLoading() {
+        document.getElementById("loadingText").style.display = "block";
+    }
+</script>
+</body>
+</html>
